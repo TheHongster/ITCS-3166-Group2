@@ -34,6 +34,9 @@ public class Main {
 		
 	}
 	
+
+	
+	
 	public String toBinary(int numDecimal) {//converts decimal -> binary
 		String numBinary = Integer.toBinaryString(numDecimal);
 		return numBinary;
