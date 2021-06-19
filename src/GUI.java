@@ -1,11 +1,10 @@
-
+// import all necessary packages 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class GUI extends JFrame {
 	public static void main(String[] args) {
-		//Variables
 		//Declarations
 		Main m = new Main();
 		JFrame f1 = new JFrame("IP Router");   
@@ -40,12 +39,16 @@ public class GUI extends JFrame {
 		f1.add(bSendData);f1.add(bEditData);f1.add(tfIP); 
 
 		//Logic
-		/*m.IPAddressBinary = m.convertToBinaryOctets(m.IPAddress);
+		/*
+		//utilize methods to convert binary octets as defined in the methodology for both the IPAdress and the subnetMask
+		m.IPAddressBinary = m.convertToBinaryOctets(m.IPAddress); 
 		m.subnetMaskBinary = m.convertToBinaryOctets(m.subnetMask);
 			for(int i = 0; i < 4; i++) {//Assigns IPAddressBinary's values to networkAddressBinary values
 				m.networkAddressBinary[i] = m.IPAddressBinary[i];
 			}
+			//calculates the binary network address given the two parameters
 		m.calcBinaryNetworkAddress(m.networkAddressBinary, m.subnetMaskBinary);
+		//provides the conversion results given the designated parameter
 		m.networkAddress = m.convertToDecimalAddress(m.networkAddressBinary);
 		*/
         
