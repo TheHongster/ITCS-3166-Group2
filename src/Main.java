@@ -3,39 +3,14 @@
  * @author Aaron Hong and Lynden Hill
  * Group Project for ITCS-3166 at the University of North Carolina, Charlotte
  */
-import javax.swing.*;
-import java.awt.*;
 public class Main {
-	public static void main(String[] args) {//main method here
-		//TODO Start organizing GUI elements and making methods to handle input
-		Main method = new Main();//used to call methods from within class Main
-		//Variables
-		String IPAddress = "135.46.63.10"; //placeholder, will need to getTextFromTextField
-		String subnetMask = "255.255.252.0"; //placeholder, 11111111 11111111 11111100 00000000 (first 22 bits)
-		String networkAddress;
-		String[] IPAddressBinary = new String[4];
-		String[] subnetMaskBinary = new String[4];
-		String[] networkAddressBinary = new String[4];
-		
-		IPAddressBinary = method.convertToBinaryOctets(IPAddress);
-		subnetMaskBinary = method.convertToBinaryOctets(subnetMask);
-		for(int i = 0; i < 4; i++) {//Assigns IPAddressBinary's values to networkAddressBinary values
-			networkAddressBinary[i] = IPAddressBinary[i];
-		}
-		method.calcBinaryNetworkAddress(networkAddressBinary, subnetMaskBinary);
-		networkAddress = method.convertToDecimalAddress(networkAddressBinary);
-		//debug
-		System.out.println("IP Address: " + IPAddress);
-		method.debugPrintBinaryOctets(IPAddressBinary);
-		System.out.println("Subnet Mask: " + subnetMask);
-		method.debugPrintBinaryOctets(subnetMaskBinary);
-		System.out.println("Network Address: " + networkAddress);
-		method.debugPrintBinaryOctets(networkAddressBinary);
-		
-	}
-	
-
-	
+	//Variables
+	String IPAddress = "";
+	String subnetMask = "";
+	String networkAddress = "";
+	String[] IPAddressBinary = new String[4];
+	String[] subnetMaskBinary = new String[4];
+	String[] networkAddressBinary = new String[4];
 	
 	public String toBinary(int numDecimal) {//converts decimal -> binary
 		String numBinary = Integer.toBinaryString(numDecimal);
