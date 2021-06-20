@@ -3,55 +3,110 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+@SuppressWarnings("serial")
 public class GUI extends JFrame {
-	public static void main(String[] args) {
+	String interface0 = "";
+	String interface1 = "";
+	String router1 = "";
+	String router2 = "Default";
+	public GUI(){
 		//Declarations
 		Main m = new Main();
-		JFrame f1 = new JFrame("IP Router");   
-	    	f1.setSize(400,400);  
-	    	f1.setLayout(null);  
-	    	f1.setVisible(true);  
+		JFrame f1 = new JFrame("IP Router");
+	    	f1.setSize(400,400);
+	    	f1.setLocationRelativeTo(null);
+	    	f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JFrame f2 = new JFrame("Edit Routing Table Info");
-			f2.setSize(200,200);  
+			f2.setSize(400,300);  
 			f2.setLayout(null);  
-			f2.setVisible(false); 
-	    TextField tfIP = new TextField();
-	    	tfIP.setBounds(105,105,150,20);
-	    TextField tfSubnetMask = new TextField();
-	    	tfSubnetMask.setBounds(105,105,150,20);
-	    	
-	    Button bSendData = new Button("Send Data");    
-	    	bSendData.setBounds(105,155,60,30);  
+			f2.setLocationRelativeTo(null);
+			f2.setVisible(false);
+			f2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//Frame1 Elements
+		JPanel p1 = new JPanel();
+		JPanel tfPanel1 = new JPanel();
+		JPanel btnPanel1 = new JPanel();
+	    JTextField tfIP = new JTextField(25);
+	    JButton bSendData = new JButton("Send Data");
+	    	bSendData.setBounds(100,100,20,20);
 	    	bSendData.addActionListener(new ActionListener() {
 	    		public void actionPerformed(ActionEvent e) {
 	    			m.IPAddress = tfIP.getText();
 	    		}
 	    	});
-	    	
-	    Button bEditData = new Button("Edit Data");
-	    	bEditData.setBounds(195,155,60,30);
+	    JButton bEditData = new JButton("Edit Data");
+	    	bEditData.setBounds(100,100,20,20);
 	    	bEditData.addActionListener(new ActionListener() {
 	    		public void actionPerformed(ActionEvent e) {
 	    			f2.setVisible(true); 
 	    		}
 	    	});
-	    //Frame formatting
-		f1.add(bSendData);f1.add(bEditData);f1.add(tfIP); 
-
-		//Logic
-		/*
-		//utilize methods to convert binary octets as defined in the methodology for both the IPAdress and the subnetMask
-		m.IPAddressBinary = m.convertToBinaryOctets(m.IPAddress); 
-		m.subnetMaskBinary = m.convertToBinaryOctets(m.subnetMask);
+	    //Frame2 Elements
+	    JLabel lSubnetMask = new JLabel("Subnet Mask:");
+	    	lSubnetMask.setBounds(50,25,100,20);
+		JTextField tfSubnetMask = new JTextField(m.subnetMask);
+	    	tfSubnetMask.setBounds(150,25,125,20);
+	    	
+	    JLabel lInterface0 = new JLabel("Interface 0:");
+	    	lInterface0.setBounds(50,50,100,20);
+	    JTextField tfInterface0 = new JTextField(interface0);
+	    	tfInterface0.setBounds(150,50,125,20);
+	    	
+	    JLabel lInterface1 = new JLabel("Interface 1:");
+	    	lInterface1.setBounds(50,75,100,20);
+	    JTextField tfInterface1 = new JTextField(interface1);
+	    	tfInterface1.setBounds(150,75,125,20);
+	    	
+	    JLabel lRouter1 = new JLabel("Router 1:");
+	    	lRouter1.setBounds(50,100,100,20);
+	    JTextField tfRouter1 = new JTextField(router1);
+	    	tfRouter1.setBounds(150,100,125,20);
+	    
+	    JLabel lRouter2 = new JLabel("Router 2:");
+	    	lRouter2.setBounds(50,125,100,20);
+	    JTextField tfRouter2 = new JTextField(router2);
+	    	tfRouter2.setBounds(150,125,125,20);
+	    JButton bApplyChanges = new JButton("Apply Changes");
+	    	bApplyChanges.setBounds(125,200,150,30);
+	    	bApplyChanges.addActionListener(new ActionListener() {
+	    		public void actionPerformed(ActionEvent e) {
+	    			interface0 = tfInterface0.getText();
+	    			interface1 = tfInterface1.getText();
+	    			router1 = tfRouter1.getText();
+	    			router2 = tfRouter2.getText();
+	    			m.subnetMask = tfSubnetMask.getText();
+	    			f2.dispose();
+	    		}
+	    	});
+	    	//Frame1 formatting
+	    	tfPanel1.add(tfIP);
+	    	btnPanel1.add(bSendData);btnPanel1.add(bEditData);
+	    	p1.add(tfPanel1, BorderLayout.PAGE_START);
+	    	p1.add(btnPanel1, BorderLayout.PAGE_END);
+	    	f1.add(p1);
+	    	f1.setVisible(true);
+	    	//Frame2 formatting
+	    	f2.add(lSubnetMask);f2.add(tfSubnetMask);
+	    	f2.add(lInterface0);f2.add(tfInterface0);
+	    	f2.add(lInterface1);f2.add(tfInterface1);
+	    	f2.add(lRouter1);f2.add(tfRouter1);
+	    	f2.add(lRouter2);f2.add(tfRouter2);
+	    	f2.add(bApplyChanges);
+	    	//Logic
+	    	/*
+			//utilize methods to convert binary octets as defined in the methodology for both the IPAdress and the subnetMask
+			m.IPAddressBinary = m.convertToBinaryOctets(m.IPAddress); 
+			m.subnetMaskBinary = m.convertToBinaryOctets(m.subnetMask);
 			for(int i = 0; i < 4; i++) {//Assigns IPAddressBinary's values to networkAddressBinary values
 				m.networkAddressBinary[i] = m.IPAddressBinary[i];
 			}
 			//calculates the binary network address given the two parameters
-		m.calcBinaryNetworkAddress(m.networkAddressBinary, m.subnetMaskBinary);
-		//provides the conversion results given the designated parameter
-		m.networkAddress = m.convertToDecimalAddress(m.networkAddressBinary);
-		*/
-        
+			m.calcBinaryNetworkAddress(m.networkAddressBinary, m.subnetMaskBinary);
+			//provides the conversion results given the designated parameter
+			m.networkAddress = m.convertToDecimalAddress(m.networkAddressBinary);
+			*/
+	}
+	public static void main(String[] args) {
+		new GUI();
 	}
 }
-
