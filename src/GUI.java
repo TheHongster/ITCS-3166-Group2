@@ -31,40 +31,39 @@ public class GUI extends JFrame {
 		JPanel btnPanel1 = new JPanel();
 		JTextArea taConsole = new JTextArea(15,30);
 			taConsole.setEditable(false);
-			
 		JScrollPane scroll = new JScrollPane(taConsole);
 			scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		JLabel lblIP = new JLabel("IP: ");
 	    JTextField tfIP = new JTextField(25);
 	    JButton bSendData = new JButton("Send Data");
 	    	bSendData.setBounds(100,100,20,20);
 	    	bSendData.addActionListener(new ActionListener() {
 	    		public void actionPerformed(ActionEvent e) {
-	    			m.IPAddress = tfIP.getText();
-	    			//utilize methods to convert binary octets as defined in the methodology for both the IPAdress and the subnetMask
-	    			m.IPAddressBinary = m.convertToBinaryOctets(m.IPAddress); 
-	    			m.subnetMaskBinary = m.convertToBinaryOctets(m.subnetMask);
-	    			
-	    			for(int i = 0; i < 4; i++) {//Assigns IPAddressBinary's values to networkAddressBinary values
-	    				m.networkAddressBinary[i] = m.IPAddressBinary[i];
-	    			}
-	    			//calculates the binary network address given the two parameters
-	    			m.calcBinaryNetworkAddress(m.networkAddressBinary, m.subnetMaskBinary);
-	    			//provides the conversion results given the designated parameter
-	    			m.networkAddress = m.convertToDecimalAddress(m.networkAddressBinary);
-	    			if(m.networkAddress.equals(interface0)) {
-	    				taConsole.append("IP: " + m.IPAddress + " will route to " + "Interface 0: " + interface0 + "\n");
-	    			}
-	    			else if(m.networkAddress.equals(interface1)) {
-	    				taConsole.append("IP: " + m.IPAddress + " will route to " + "Interface 1: " + interface1 + "\n");
-	    			}
-	    			else if(m.networkAddress.equals(router1)) {
-	    				taConsole.append("IP: " + m.IPAddress + " will route to " + "Router 1: " + router1 + "\n");
-	    			}
-	    			else {
-	    				taConsole.append("IP: " + m.IPAddress + " will route to " + "Router 2: " + router2 + "\n");
-	    			}
-	    			
+		    		m.IPAddress = tfIP.getText();
+		    		//utilize methods to convert binary octets as defined in the methodology for both the IPAdress and the subnetMask
+		    		m.IPAddressBinary = m.convertToBinaryOctets(m.IPAddress); 
+		    		m.subnetMaskBinary = m.convertToBinaryOctets(m.subnetMask);
+		    		for(int i = 0; i < 4; i++) {//Assigns IPAddressBinary's values to networkAddressBinary values
+		    			m.networkAddressBinary[i] = m.IPAddressBinary[i];
+		    		}
+		    		//calculates the binary network address given the two parameters
+		    		m.calcBinaryNetworkAddress(m.networkAddressBinary, m.subnetMaskBinary);
+		    		//provides the conversion results given the designated parameter
+		    		m.networkAddress = m.convertToDecimalAddress(m.networkAddressBinary);
+		    		if(m.networkAddress.equals(interface0)) {
+		    			taConsole.append("IP: " + m.IPAddress + " will route to " + "Interface 0: " + interface0 + "\n");
+		    		}
+		    		else if(m.networkAddress.equals(interface1)) {
+		    			taConsole.append("IP: " + m.IPAddress + " will route to " + "Interface 1: " + interface1 + "\n");
+		    		}
+		    		else if(m.networkAddress.equals(router1)) {
+		    			taConsole.append("IP: " + m.IPAddress + " will route to " + "Router 1: " + router1 + "\n");
+		    		}
+		    		else {
+		    			taConsole.append("IP: " + m.IPAddress + " will route to " + "Router 2: " + router2 + "\n");
+		    		}
 	    		}
+	    		
 	    	});
 	    	
 	    JButton bEditData = new JButton("Edit Data");
@@ -112,7 +111,7 @@ public class GUI extends JFrame {
 	    		}
 	    	});
 	    	//Frame1 formatting
-	    	tfPanel1.add(tfIP);
+	    	tfPanel1.add(lblIP);tfPanel1.add(tfIP);
 	    	btnPanel1.add(bSendData);btnPanel1.add(bEditData);
 	    	consoleLog.add(scroll);
 	    	p1.add(tfPanel1, BorderLayout.PAGE_START);
